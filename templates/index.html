@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLOv9 Object Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .upload-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .result-section {
+            text-align: center;
+        }
+        #detected-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card upload-section">
+                    <h2 class="text-center mb-4">YOLOv9 Object Detection</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="fileUpload" class="form-label">Upload Image or Video</label>
+                            <input type="file" class="form-control" id="fileUpload" name="file" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Detect Objects</button>
+                    </form>
+                    <p class="text-center text-muted mt-3">Built with PyTorch & Flask</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3 result-section">
+                {% if image_path %}
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Detected Objects</h3>
+                        <img id="detected-image" src="{{ url_for('predict_img', filename=image_path) }}" alt="Detected Objects">
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
